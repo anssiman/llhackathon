@@ -1,0 +1,22 @@
+<h2>My Cards</h2>
+
+<div>
+  <label>Card name:
+    <input #cardName />
+  </label>
+  <!-- (click) passes input value to add() and then clears the input -->
+  <button (click)="add(cardName.value); cardName.value=''">
+    add
+  </button>
+</div>
+
+<ul class="cards">
+  <li *ngFor="let card of cards">
+    <a routerLink="/detail/{{card.id}}">
+      <img src="{{card.image}}" alt="{{card.name}}" height="75"> 
+      <!--span class="badge">{{card.id}}</span--> {{card.name}}
+    </a>
+    <!--button class="delete" title="delete card"
+    (click)="delete(card)">x</button-->
+  </li>
+</ul>
