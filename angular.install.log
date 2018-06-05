@@ -1,0 +1,37 @@
+Muistilista:
+
+curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+sudo apt-get install -y nodejs
+
+sudo npm install -g @angular/cli
+
+sudo npm install -g typescript
+
+
+sudo add-apt-repository ppa:git-core/ppa
+sudo apt-get update
+sudo apt-get install git
+
+curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
+sudo mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg
+sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
+sudo apt-get update
+sudo apt-get install code
+
+sudo npm install angular-in-memory-web-api --save
+sudo npm install @angular/common@^6.0.0-rc.0
+sudo npm install @angular/core@^6.0.0-rc.0
+sudo npm install @angular/http@^6.0.0-rc.0
+sudo npm install rxjs@^6.0.0-beta.1
+sudo npm install zone.js@~0.8.26
+sudo npm install @angular/platform-browser@6.0.3
+
+ng -v
+tsc -v
+git --version
+chromium-browser --version
+code --version
+code --list-extensions
+
+
+
