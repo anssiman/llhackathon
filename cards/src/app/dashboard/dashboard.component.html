@@ -1,12 +1,9 @@
-<h3>Top Cards</h3>
+<h3>Choose your card!</h3>
 <div class="grid grid-pad">
-  <a *ngFor="let card of cards" class="col-1-4"
-      routerLink="/detail/{{card.id}}">
+  <a *ngFor="let card of cards" class="col-1-4" routerLink="/detail/{{card.id}}">
     <div class="module card">
       <h4>{{card.name | uppercase }}</h4>
-    </div>
-    <div class="module card2">
-      <img src="{{card.image}}" alt="{{card.name}}" height="250">
+      <img src="{{card.image}}" alt="{{card.name}}" width="100%"/>
     </div>
   </a>
 </div>
