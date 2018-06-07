@@ -1,11 +1,24 @@
 <h3>Choose your card!</h3>
+
 <div class="grid grid-pad">
-  <a *ngFor="let card of cards" class="col-1-4" routerLink="/detail/{{card.id}}">
-    <div class="module card">
-      <h4>{{card.name | uppercase }}</h4>
-      <img src="{{card.image}}" alt="{{card.name}}" width="100%"/>
-    </div>
-  </a>
+  <ng-container *ngFor="let suit of suits">
+    <a class="col-1-4" routerLink="/dashboard">
+      <div class="module card">
+        <h2>{{suit.name | uppercase }}</h2>
+        <img src="{{suit.image}}" alt="{{suit.name}}" width="100%"/>
+      </div>
+    </a>
+  </ng-container>
+
+  <ng-container *ngFor="let card of cards">
+    <a class="col-1-4" routerLink="/detail/{{card.id}}">
+      <div class="module card">
+        <h4>{{card.name | uppercase }}</h4>
+        <img *ngIf="card.owner" src="{{card.bimage}}" alt="{{card.name}}" width="100%"/>
+        <img *ngIf="!card.owner" src="{{card.image}}" alt="{{card.name}}" width="100%"/>
+      </div>
+    </a>
+  </ng-container>
 </div>
 
 <app-card-search></app-card-search>

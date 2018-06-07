@@ -3,7 +3,7 @@
   <h3>{{ card.name | uppercase }} Details</h3>
   <div><label><span>Id: </span>{{card.id}}</label></div>
   <div><label><span>Name: </span>{{card.name}}</label></div>
-  <div>
+  <div *ngIf="card.owner!='system'">
     <label>Owner:
       <input [(ngModel)]="card.owner" placeholder="owner"/>
     </label>

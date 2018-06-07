@@ -12,7 +12,7 @@
 
 <ul class="cards">
   <ng-container *ngFor="let card of cards">
-    <li *ngIf="card.owner">
+    <li *ngIf="card.owner && card.owner!='system'">
       <a routerLink="/detail/{{card.id}}">
         <img src="{{card.image}}" alt="{{card.name}}" width="33%"/>
         <p>
