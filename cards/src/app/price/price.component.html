@@ -1,7 +1,41 @@
 <div align="center" *ngIf="price">
   <div><label>&nbsp;</label></div>
-  <h3>Price Details</h3>
-  <div><label><span>Name: </span>{{price.name}}</label></div>
-  <div><label><span>Url: </span>{{price.url}}</label></div>
-  <div><label><span>Provided by: </span>{{price.provider}}</label></div>
+  <h1>Price Details</h1>
+ 
+  <div *ngIf="!doEdit">
+    <div><label><span></span>{{price.name}}</label></div>
+    <div><label><span></span>{{price.description}}</label></div>
+    <div><label><span>More information: </span><a href='{{price.url}}'>{{price.url}}</a></label></div>
+    <div><label><span>Provided by: </span>{{price.provider}}</label></div>
+    <div><label><span>Lottery date: </span>{{price.dateOfLottery}}</label></div>
+    <div><button (click)="startEdit()">Edit</button></div>
+  </div>
+  <div *ngIf="doEdit">
+    <div>
+    <label>Name:
+      <input [(ngModel)]="price.name" placeholder="name"/>
+    </label>
+    </div>
+    <div>
+    <label>Description:
+      <input [(ngModel)]="price.description" placeholder="description"/>
+    </label>
+    </div>
+    <div>
+    <label>URL:
+      <input [(ngModel)]="price.url" placeholder="url"/>
+    </label>
+    </div>
+    <div>
+    <label>Provider:
+      <input [(ngModel)]="price.provider" placeholder="provider"/>
+    </label>
+    </div>
+    <div>
+    <label>Lottery date:
+      <input [(ngModel)]="price.dateOfLottery" placeholder="date of lottery"/>
+    </label>
+    </div>
+  <div><button (click)="save()">Save</button></div>
+    
 </div>
