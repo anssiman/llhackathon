@@ -1,6 +1,7 @@
 <div align="center" *ngIf="card">
     <div><label>&nbsp;</label></div>
     <h3>{{ card.name | uppercase }} Details</h3>
+    <div><label><span>Rnd: </span>{{card.rnd}}</label></div>
     <div><label><span>Id: </span>{{card.id}}</label></div>
     <div><label><span>Name: </span>{{card.name}}</label></div>
     <div *ngIf="card.owner!='system'">
