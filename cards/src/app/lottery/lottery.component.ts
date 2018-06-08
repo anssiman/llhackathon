@@ -29,7 +29,10 @@ export class LotteryComponent implements OnInit {
     .subscribe(cards => this.cards = cards);
 
     if (this.cards && this.cards.length>0)
-      this.cards = this.cards.sort((a,b)=>a.rnd-b.rnd);
+      this.cards = this.cards.filter(h => (h.owner!='' && h.owner!='system'));
+
+    if (this.cards && this.cards.length>0)
+      this.cards.sort((a,b)=>b.rnd-a.rnd);
   }
 
 }

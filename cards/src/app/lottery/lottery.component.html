@@ -3,7 +3,7 @@
 <ul class="cards">
   <ng-container *ngFor="let card of cards">
     <a class="col-1-4">
-      <li *ngIf="card.owner && card.owner!='system'">
+      <li *ngIf="card.owner!='' && card.owner!='system'">
         <a routerLink="/lottery-detail/{{card.id}}">
           <img src="{{card.bimage}}" width="100%"/>
         </a>
