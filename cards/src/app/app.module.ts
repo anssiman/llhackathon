@@ -15,6 +15,7 @@ import { CardsComponent }      from './cards/cards.component';
 import { CardSearchComponent }  from './card-search/card-search.component';
 import { MessagesComponent }    from './messages/messages.component';
 import { LotteryComponent } from './lottery/lottery.component';
+import { ResetPinComponent } from './reset-pin/reset-pin.component';
 
 @NgModule({
   imports: [
@@ -37,7 +38,8 @@ import { LotteryComponent } from './lottery/lottery.component';
     CardDetailComponent,
     MessagesComponent,
     CardSearchComponent,
-    LotteryComponent
+    LotteryComponent,
+    ResetPinComponent
   ],
   bootstrap: [ AppComponent ]
 })

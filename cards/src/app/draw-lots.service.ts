@@ -14,7 +14,7 @@ export class DrawLotsService {
 
   drawLots(){
     this.cardService.getCards().subscribe(cards => this.cards = cards);
-    this.cards = this.cards.filter(h => h.owner != '');
+    this.cards = this.cards.filter(h => (h.owner != '' && h.owner!='system'));
     for (var i = 0; i < this.cards.length; i++) {
       this.cards[i].rnd = Math.floor(100000*Math.random());
       this.cardService.updateCard (this.cards[i]);
