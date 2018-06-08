@@ -27,7 +27,7 @@ export class DrawLotsService {
         break;
       };
       M.add(N,true);
-      this.cards[i].rnd = Math.floor(100000*Math.random());
+      this.cards[i].rnd = N;
       this.cardService.updateCard (this.cards[i]);
     }
   });
