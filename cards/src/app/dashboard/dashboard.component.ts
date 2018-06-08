@@ -9,15 +9,21 @@ import { CardService } from '../card.service';
 })
 export class DashboardComponent implements OnInit {
   cards: Card[] = [];
+  suits: Card[] = [];
 
   constructor(private cardService: CardService) { }
 
   ngOnInit() {
     this.getCards();
+    this.getSuits();
   }
 
   getCards(): void {
     this.cardService.getCards()
-      .subscribe(cards => this.cards = cards.slice(36, 40));
+      .subscribe(cards => this.cards = cards.slice(4, 60));
+  }
+  getSuits(): void {
+    this.cardService.getCards()
+      .subscribe(suits => this.suits = suits.slice(0, 4));
   }
 }

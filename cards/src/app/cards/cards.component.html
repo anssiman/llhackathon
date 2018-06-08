@@ -1,22 +1,29 @@
-<h2>My Cards</h2>
+<h3>Reserved Cards:</h3>
 
-<div>
+<!--div>
   <label>Card name:
     <input #cardName />
-  </label>
-  <!-- (click) passes input value to add() and then clears the input -->
+  </label-
+  < (click) passes input value to add() and then clears the input>
   <button (click)="add(cardName.value); cardName.value=''">
     add
   </button>
-</div>
+</div-->
 
 <ul class="cards">
-  <li *ngFor="let card of cards">
-    <a routerLink="/detail/{{card.id}}">
-      <img src="{{card.image}}" alt="{{card.name}}" height="75"> 
-      <!--span class="badge">{{card.id}}</span--> {{card.name}}
-    </a>
-    <!--button class="delete" title="delete card"
-    (click)="delete(card)">x</button-->
-  </li>
+  <ng-container *ngFor="let card of cards">
+    <li *ngIf="card.owner && card.owner!='system'">
+      <a routerLink="/detail/{{card.id}}">
+        <img src="{{card.image}}" alt="{{card.name}}" width="33%"/>
+        <p>
+          Name: {{card.name}}
+        </p>
+        <p>
+          Owner: {{card.owner}}
+        </p>
+      </a>
+      <!--button class="delete" title="delete card"
+      (click)="delete(card)">x</button-->
+      </li>
+  </ng-container>
 </ul>

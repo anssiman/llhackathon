@@ -1,12 +1,15 @@
-<div *ngIf="card">
-  <h2>{{ card.name | uppercase }} Details</h2>
-  <div><span>id: </span>{{card.id}}</div>
-  <div>
-    <label>name:
-      <input [(ngModel)]="card.name" placeholder="name"/>
+<div align="center" *ngIf="card">
+  <div><label>&nbsp;</label></div>
+  <h3>{{ card.name | uppercase }} Details</h3>
+  <div><label><span>Id: </span>{{card.id}}</label></div>
+  <div><label><span>Name: </span>{{card.name}}</label></div>
+  <div *ngIf="card.owner!='system'">
+    <label>Owner:
+      <input [(ngModel)]="card.owner" placeholder="owner"/>
     </label>
   </div>
-  <div><img src="{{card.image}}" alt="{{card.name}}" height="290"></div>
-  <button (click)="goBack()">go back</button>
-  <button (click)="save()">save</button>
+  <button (click)="goBack()">Back</button>
+  &nbsp;&nbsp;
+  <button (click)="save()">Save</button>
+  <div><img src="{{card.image}}" alt="{{card.name}}" width="25%"></div>
 </div>

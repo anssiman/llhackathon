@@ -1,28 +1,41 @@
 /* AppComponent's private CSS styles */
 h1 {
-  font-size: 1.2em;
-  color: #999;
+  font-size: 2em;
+  color: #607D8B;
   margin-bottom: 0;
+  text-align: center;
 }
 h2 {
   font-size: 2em;
-  margin-top: 0;
-  padding-top: 0;
+  color: #607D8B;
+  margin-top: 2px;
+  text-align: center;
+}
+h3 {
+  font-size: 2em;
+  color: #607D8B;
+  margin-top: 2px;
+  text-align: center;
+}
+nav {
+  text-align: center;
 }
 nav a {
+  font-size: 1.3em;
   padding: 5px 10px;
   text-decoration: none;
-  margin-top: 10px;
+  margin-top: 20px;
   display: inline-block;
-  background-color: #eee;
+  background-color: #EEE;
   border-radius: 4px;
+  text-align: center;
 }
 nav a:visited, a:link {
   color: #607D8B;
 }
 nav a:hover {
-  color: #039be5;
-  background-color: #CFD8DC;
+  color: #EEE;
+  background-color: #607D8B;
 }
 nav a.active {
   color: #039be5;
