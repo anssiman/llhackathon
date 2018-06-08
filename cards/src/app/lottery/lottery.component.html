@@ -1,0 +1,13 @@
+<h3>Choose next card!</h3>
+
+<div class="grid grid-pad">
+  <ng-container *ngFor="let card of lottery">
+    <a class="col-1-4" routerLink="/lottery">
+      <div class="module card">
+        <h4>{{card.name | uppercase }}</h4>
+        <img *ngIf="card.owner" src="{{card.bimage}}" alt="{{card.name}}" width="100%"/>
+        <img *ngIf="!card.owner" src="{{card.image}}" alt="{{card.name}}" width="100%"/>
+      </div>
+    </a>
+  </ng-container>
+</div>
