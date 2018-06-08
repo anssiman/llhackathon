@@ -6,4 +6,5 @@ export class Card {
   image: string;
   bimage: string;
   name: string;
+  rnd : number;
 }

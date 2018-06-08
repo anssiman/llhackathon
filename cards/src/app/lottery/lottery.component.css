@@ -1,0 +1,70 @@
+/* DashboardComponent's private CSS styles */
+[class*='col-'] {
+  float: left;
+  padding-right: 20px;
+  padding-bottom: 20px;
+}
+[class*='col-']:last-of-type {
+  padding-right: 0;
+}
+a {
+  text-decoration: none;
+}
+*, *:after, *:before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+h3 {
+  text-align: center;
+  margin-bottom: 10px;
+  color: #607D8B;
+}
+h4 {
+  position: relative;
+}
+.grid {
+  margin: 0;
+}
+.col-1-4 {
+  width: 25%;
+}
+.col-1-4-img {
+  width: 100%;
+  object-fit: cover
+}
+.module {
+  padding: 20px;
+  text-align: center;
+  color: #607D8B;
+  background-color: #EEE;
+  border-radius: 4px;
+  width: 100%;
+  height: 100%;
+  min-width: 120px;
+  object-fit: cover
+}
+.module:hover {
+  background-color: #607D8B;
+  cursor: pointer;
+  color: #EEE;
+}
+.grid-pad {
+  padding: 10px 0;
+}
+.grid-pad > [class*='col-']:last-of-type {
+  padding-right: 20px;
+}
+@media (max-width: 600px) {
+  .module {
+    font-size: 10px;
+    max-height: 75px; }
+}
+@media (max-width: 1024px) {
+  .grid {
+    margin: 0;
+  }
+  .module {
+    min-width: 60px;
+  }
+}
