@@ -34,7 +34,7 @@ export class LotteryDetailComponent implements OnInit {
   }
 
  clear(): void {
-    this.card.rnd = 0;
+    this.card.owner= '';
     this.cardService.updateCard(this.card)
       .subscribe(() => this.goBack());
   }

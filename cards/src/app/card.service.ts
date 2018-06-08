@@ -17,6 +17,7 @@ export class CardService {
   private cardsUrl = 'api/cards';  // URL to web api
 
   constructor(
+    private cardService: CardService,
     private http: HttpClient,
     private messageService: MessageService) { }
 

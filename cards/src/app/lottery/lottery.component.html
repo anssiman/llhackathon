@@ -1,10 +1,12 @@
 <h3>Choose next card!</h3>
   
 <ul class="cards">
-    <ng-container *ngFor="let card of cards">
-      <li *ngIf="card.rnd && card.rnd!='0'">
+  <ng-container *ngFor="let card of cards">
+    <a class="col-1-4">
+      <li *ngIf="card.owner && card.owner!='system'">
         <a routerLink="/lottery-detail/{{card.id}}">
-          <img src="{{card.bimage}}" width="33%"/>
+          <img src="{{card.bimage}}" width="100%"/>
         </a>
-    </ng-container>
-  </ul>
+    </a>
+  </ng-container>
+</ul>
