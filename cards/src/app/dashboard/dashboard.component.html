@@ -16,6 +16,7 @@
         <h4>{{card.name | uppercase }}</h4>
         <img *ngIf="card.owner" src="{{card.bimage}}" alt="{{card.name}}" width="100%"/>
         <img *ngIf="!card.owner" src="{{card.image}}" alt="{{card.name}}" width="100%"/>
+        <h4>{{card.owner}}</h4>
       </div>
     </a>
   </ng-container>
