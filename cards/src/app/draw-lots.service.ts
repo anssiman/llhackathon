@@ -1,24 +1,36 @@
 import { Injectable } from '@angular/core';
 
+import { Observable, of } from 'rxjs';
+
+import { Map } from './Map';
 import { Card } from './card';
 import { CardService } from './card.service';
 
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({  providedIn: 'root'})
 export class DrawLotsService {
-  cards: Card[];
-
-  constructor(private cardService: CardService) { }
+  private cards: Card[];
+  constructor(private cardService: CardService) {this.cards=[]; }
 
   drawLots(){
-    this.cardService.getCards().subscribe(cards => this.cards = cards);
-    this.cards = this.cards.filter(h => h.owner != '');
+    this.cardService.getCards().subscribe((acards : Card[]) => {
+      this.cards = JSON.parse(JSON.stringify(acards));
+    if(this.cards && this.cards.length>0)
+      this.cards = this.cards.filter(h => (h.owner != '' && h.owner!='system'));
+    let M = new Map<Boolean>();
+    let N=0;
     for (var i = 0; i < this.cards.length; i++) {
+      for(;1;){
+        N = Math.floor(100000*Math.random());
+        if(M.has(N)===true)
+          continue;
+        break;
+      };
+      M.add(N,true);
       this.cards[i].rnd = Math.floor(100000*Math.random());
       this.cardService.updateCard (this.cards[i]);
     }
+  });
   }
 
 }
