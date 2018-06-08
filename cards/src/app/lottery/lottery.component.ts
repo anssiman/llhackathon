@@ -21,11 +21,15 @@ export class LotteryComponent implements OnInit {
   }
 
   drawLots(): void {
-    this.drawLotsService.drawLots();
+    this.drawLotsService.drawLots();  
   }
 
   getCards(): void {
     this.cardService.getCards()
     .subscribe(cards => this.cards = cards);
-  } 
+
+    if (this.cards && this.cards.length>0)
+      this.cards = this.cards.sort((a,b)=>a.rnd-b.rnd);
+  }
+
 }
