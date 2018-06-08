@@ -19,13 +19,14 @@ export class ResetPinComponent implements OnInit {
 
   reset(value : string){
     if(this.pinValue == '1234'){
-      this.cardService.getCards().subscribe(cards => this.cards = cards);
+      this.cardService.getCards().subscribe((acards : Card[]) => {
+        this.cards = JSON.parse(JSON.stringify(acards));
       for (var i = 0; i < this.cards.length; i++) {
         this.cards[i].rnd = undefined;
         this.cards[i].owner = undefined;
         this.cardService.updateCard (this.cards[i]);
       }
-  
+    });
     }
   }
 
