@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { Observable, of } from 'rxjs';
 
-import { Map } from './Map';
+import { Map } from './map';
 import { Card } from './card';
 import { CardService } from './card.service';
 
