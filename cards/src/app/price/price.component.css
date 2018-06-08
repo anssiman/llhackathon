@@ -1,4 +1,4 @@
-/* CardDetailComponent's private CSS styles */
+
 label {
     display: inline-block;
     margin: .5em 0;
@@ -35,4 +35,18 @@ label {
     text-align: center;
     margin-bottom: 10px;
     color: #607D8B;
+  }
+  .prices {
+    margin: 0 0 2em 0;
+    list-style-type: none;
+    padding: 0;
+  }
+  .prices li {
+    position: relative;
+    cursor: pointer;
+    background-color: rgb(255, 255, 255);
+    margin: .5em;
+    padding: .3em 0;
+    height: 100;
+    border-radius: 4px;
   }

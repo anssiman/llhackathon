@@ -13,26 +13,45 @@ const httpOptions = {
 @Injectable({ providedIn: 'root' })
 export class PriceService {
 
-  private priceUrl = 'api/price/0';  // URL to web api
+  private priceUrl = 'api/price';  // URL to web api
   constructor(
     private http: HttpClient,
     private messageService: MessageService) { }
   /** GET price by id. Will 404 if id not found */
-  getPrice(): Observable<Price> {
+  getPrices(): Observable<Price[]> {
     const url = `${this.priceUrl}`;
-    return this.http.get<Price>(url).pipe(
-      tap(_ => this.log(`fetched price`)),
-      catchError(this.handleError<Price>(`getPrice`))
+    return this.http.get<Price[]>(url).pipe(
+      tap(_ => this.log(`fetched prices`)),
+      catchError(this.handleError<Price[]>(`getPrices`))
     );
   }
 
-   /** POST card by id. Will 404 if id not found */
-   setPrice(price: Price): Observable<any> {
+   /** POST price by id. Will 404 if id not found */
+  setPrice(price: Price): Observable<any> {
     return this.http.post(this.priceUrl, price, httpOptions).pipe(
       tap(_ => this.log(`updated price ${price}`)),
       catchError(this.handleError<any>('updatePrice'))
     );
   }
+
+  addPrice(price: Price): Observable<Price> {
+    return this.http.post<Price>(this.priceUrl, price, httpOptions).pipe(
+      tap((price_: Price) => this.log(`added price w/ id=${price_.id}`)),
+      catchError(this.handleError<Price>('addPrice'))
+    );
+  }
+
+  /** DELETE: delete the price from the server */
+  deletePrice (price: Price | number): Observable<Price> {
+    const id = typeof price === 'number' ? price : price.id;
+    const url = `${this.priceUrl}/${id}`;
+
+    return this.http.delete<Price>(url, httpOptions).pipe(
+      tap(_ => this.log(`deleted price id=${id}`)),
+      catchError(this.handleError<Price>('deletePrice'))
+    );
+  }
+
   /**
    * Handle Http operation that failed.
    * Let the app continue.

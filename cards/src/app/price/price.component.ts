@@ -8,27 +8,46 @@ import { PriceService } from './price.service';
   styleUrls: ['./price.component.css']
 })
 export class PriceComponent implements OnInit {
-  price: Price;
-  doEdit: boolean;
+  prices: Price[];
+  doEditId: number;
 
   constructor(private priceService: PriceService) { }
 
   ngOnInit() {
-    this.getPrice();
-    this.doEdit = false;
+    this.getPrices();
+    this.doEditId = -1;
   }
 
-  getPrice(): void {
-    this.priceService.getPrice()
-      .subscribe(price => this.price = price);
+  getPrices(): void {
+    this.priceService.getPrices()
+      .subscribe(prices => this.prices = prices);
   }
 
-  startEdit(): void {
-    this.doEdit = true;
+  startEdit(price): void {
+    this.doEditId = price.id;
   }
 
-  save(): void {
-    this.priceService.setPrice(this.price)
-      .subscribe(() => this.doEdit = false);
+  save(price: Price): void {
+    this.priceService.setPrice(price)
+      .subscribe(() => this.doEditId = -1);
+  }
+
+  remove(price: Price): void {
+    this.prices = this.prices.filter(h => h !== price);
+    this.priceService.deletePrice(price);
+  }
+
+  addPrice(): void {
+    let p = new Price();
+    p.name = 'Name';
+    p.description = 'Description';
+    p.provider = 'Provider';
+    p.url = 'URL';
+    p.dateOfLottery = 'Date Of Lottery';
+    this.priceService.addPrice(p)
+      .subscribe((price: Price) => {
+        this.doEditId = price.id;
+        this.prices.push(price);
+      });
   }
 }

@@ -1,16 +1,19 @@
-<div align="center" *ngIf="price">
+<div align="center" *ngIf="prices">
   <div><label>&nbsp;</label></div>
   <h1>Price Details</h1>
- 
-  <div *ngIf="!doEdit">
+  <ul class="prices">
+  <ng-container  *ngFor="let price of prices">
+    <li>
+    <div *ngIf="doEditId !== price.id">
     <div><label><span></span>{{price.name}}</label></div>
     <div><label><span></span>{{price.description}}</label></div>
     <div><label><span>More information: </span><a href='{{price.url}}'>{{price.url}}</a></label></div>
     <div><label><span>Provided by: </span>{{price.provider}}</label></div>
     <div><label><span>Lottery date: </span>{{price.dateOfLottery}}</label></div>
-    <div><button (click)="startEdit()">Edit</button></div>
+    <div><button (click)="startEdit(price)">Edit</button></div>
+    <div><button (click)="remove(price)">Remove</button></div>
   </div>
-  <div *ngIf="doEdit">
+<div *ngIf="doEditId === price.id">
     <div>
     <label>Name:
       <input [(ngModel)]="price.name" placeholder="name"/>
@@ -36,6 +39,10 @@
       <input [(ngModel)]="price.dateOfLottery" placeholder="date of lottery"/>
     </label>
     </div>
-  <div><button (click)="save()">Save</button></div>
-    
-</div>
+    <div><button (click)="save(price)">Save</button></div>
+  </div>
+</li>
+</ng-container>
+</ul>
+
+<div><button (click)="addPrice()">Add</button></div>
