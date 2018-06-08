@@ -39,11 +39,11 @@ export class PriceComponent implements OnInit {
 
   addPrice(): void {
     let p = new Price();
-    p.name = 'Name';
-    p.description = 'Description';
-    p.provider = 'Provider';
-    p.url = 'URL';
-    p.dateOfLottery = 'Date Of Lottery';
+    p.name = '';
+    p.description = '';
+    p.provider = '';
+    p.url = '';
+    p.dateOfLottery = '';
     this.priceService.addPrice(p)
       .subscribe((price: Price) => {
         this.doEditId = price.id;
