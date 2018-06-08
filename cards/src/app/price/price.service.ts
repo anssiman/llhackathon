@@ -6,14 +6,18 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { Price } from './price';
 import { MessageService } from '../message.service';
 
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
+
 @Injectable({ providedIn: 'root' })
 export class PriceService {
 
-  private priceUrl = 'api/price';  // URL to web api
+  private priceUrl = 'api/price/0';  // URL to web api
   constructor(
     private http: HttpClient,
     private messageService: MessageService) { }
-  /** GET card by id. Will 404 if id not found */
+  /** GET price by id. Will 404 if id not found */
   getPrice(): Observable<Price> {
     const url = `${this.priceUrl}`;
     return this.http.get<Price>(url).pipe(
@@ -22,6 +26,13 @@ export class PriceService {
     );
   }
 
+   /** POST card by id. Will 404 if id not found */
+   setPrice(price: Price): Observable<any> {
+    return this.http.post(this.priceUrl, price, httpOptions).pipe(
+      tap(_ => this.log(`updated price ${price}`)),
+      catchError(this.handleError<any>('updatePrice'))
+    );
+  }
   /**
    * Handle Http operation that failed.
    * Let the app continue.
