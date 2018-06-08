@@ -14,6 +14,7 @@ import { CardDetailComponent }  from './card-detail/card-detail.component';
 import { CardsComponent }      from './cards/cards.component';
 import { CardSearchComponent }  from './card-search/card-search.component';
 import { MessagesComponent }    from './messages/messages.component';
+import { LotteryComponent } from './lottery/lottery.component';
 
 @NgModule({
   imports: [
@@ -35,7 +36,8 @@ import { MessagesComponent }    from './messages/messages.component';
     CardsComponent,
     CardDetailComponent,
     MessagesComponent,
-    CardSearchComponent
+    CardSearchComponent,
+    LotteryComponent
   ],
   bootstrap: [ AppComponent ]
 })
