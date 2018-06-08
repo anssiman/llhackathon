@@ -12,11 +12,9 @@ export class LotteryComponent implements OnInit {
 
   constructor(private drawLotsService: DrawLotsService) { }
 
-  ngOnInit() {
-    this.getCards();
-  }
+  ngOnInit() {}
 
-  getCards(): void {
-    this.drawLotsService.getCards();
+  drawLots(): void {
+    this.drawLotsService.drawLots();
   }
 }
