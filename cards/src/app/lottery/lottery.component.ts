@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import { Card } from '../card';
 import { DrawLotsService } from '../draw-lots.service';
 
@@ -12,7 +13,9 @@ export class LotteryComponent implements OnInit {
 
   constructor(private drawLotsService: DrawLotsService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.drawLots();
+  }
 
   drawLots(): void {
     this.drawLotsService.drawLots();

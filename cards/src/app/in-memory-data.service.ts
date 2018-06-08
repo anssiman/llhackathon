@@ -3,6 +3,7 @@ declare var require: any;
 
 export class InMemoryDataService implements InMemoryDbService {
   createDb() { 
+    const price = { name: "Jaloviina *", url: "https://www.alko.fi/products/000706/Jaloviina-", description: "Yhden tähden jallu", provider: "Antti"};
     const cards = [
       {id:   1 , value:  0 , suit: 'spades'   , owner: 'system' , image: require('../../png/spades2.png')           , bimage: require('../../png/back.png')  , name: 'spades'                       },
       {id:   2 , value:  0 , suit: 'hearts'   , owner: 'system' , image: require('../../png/hearts2.png')           , bimage: require('../../png/back.png')  , name: 'hearts'                       },
@@ -79,6 +80,6 @@ export class InMemoryDataService implements InMemoryDbService {
       {id: 503 , value:  0 , suit: 'other'    , owner: 'system' , image: require('../../png/back.png')              , bimage: require('../../png/back.png')  , name: '\u00A0'                       },
       {id: 504 , value:  0 , suit: 'other'    , owner: 'system' , image: require('../../png/back.png')              , bimage: require('../../png/back.png')  , name: '\u00A0'                       }
     ];
-    return {cards};
+    return {cards, price};
   }
 }
