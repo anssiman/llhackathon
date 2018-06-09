@@ -10,29 +10,32 @@ import { CardService } from '../card.service';
   styleUrls: [ './lottery.component.css' ]
 })
 export class LotteryComponent implements OnInit {
-  cards: Card[] = [];
+  private cards: Card[];
 
   constructor(private drawLotsService: DrawLotsService,
-              private cardService: CardService) { }
+              private cardService: CardService) { this.cards=[];}
 
   ngOnInit() {
-    this.drawLots();
+    this.drawLotsService.drawLots();
     this.getCards();
   }
 
-  drawLots(): void {
-    this.drawLotsService.drawLots();  
-  }
+  getCards(): Boolean {
+    let r=false;
+    this.cardService.getCards().subscribe((acards : Card[]) => {
+      this.cards = JSON.parse(JSON.stringify(acards));
 
-  getCards(): void {
-    this.cardService.getCards()
-    .subscribe(cards => this.cards = cards);
+      for (var i = 0; i < this.cards.length; i++) {
+        console.log(this.cards[i].rnd);
+      }
+        
+    if (this.cards && this.cards.length>0)
+      this.cards = this.cards.filter(h => (h.rnd!=''));
 
     if (this.cards && this.cards.length>0)
-      this.cards = this.cards.filter(h => (h.owner!='' && h.owner!='system'));
-
-    if (this.cards && this.cards.length>0)
-      this.cards.sort((a,b)=>b.rnd-a.rnd);
+      this.cards.sort((a,b)=>(+b.rnd)-(+a.rnd));
+      r=true;
+    });
+    return r;
   }
-
 }

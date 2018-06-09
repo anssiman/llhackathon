@@ -12,7 +12,8 @@ export class DrawLotsService {
   private cards: Card[];
   constructor(private cardService: CardService) {this.cards=[]; }
 
-  drawLots(){
+  drawLots() : boolean{
+    let R=false;
     this.cardService.getCards().subscribe((acards : Card[]) => {
       this.cards = JSON.parse(JSON.stringify(acards));
     if(this.cards && this.cards.length>0)
@@ -27,10 +28,12 @@ export class DrawLotsService {
         break;
       };
       M.add(N,true);
-      this.cards[i].rnd = N;
-      this.cardService.updateCard (this.cards[i]);
+      this.cards[i].rnd = N.toString();
+      this.cardService.updateCard (this.cards[i]).subscribe();
+      R=true;
     }
   });
+  return R;
   }
 
 }

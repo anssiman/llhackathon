@@ -87,7 +87,7 @@ export class CardService {
 
   /** PUT: update the card on the server */
   updateCard (card: Card): Observable<any> {
-    return this.http.put(this.cardsUrl, card, httpOptions).pipe(
+    return this.http.put<Card>(this.cardsUrl, card, httpOptions).pipe(
       tap(_ => this.log(`updated card id=${card.id}`)),
       catchError(this.handleError<any>('updateCard'))
     );

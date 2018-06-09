@@ -24,7 +24,7 @@ export class ResetPinComponent implements OnInit {
       for (var i = 0; i < this.cards.length; i++) {
         this.cards[i].rnd = undefined;
         this.cards[i].owner = undefined;
-        this.cardService.updateCard (this.cards[i]);
+        this.cardService.updateCard (this.cards[i]).subscribe();
       }
     });
     }
