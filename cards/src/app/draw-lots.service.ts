@@ -18,7 +18,7 @@ const httpOptions = {
 export class DrawLotsService {
   private cards: Card[];
 
-  private lockUrl = 'api/lottery';  // URL to web api
+  private lockUrl = 'api/locks';  // URL to web api
 
   constructor(
     private http: HttpClient,
@@ -53,21 +53,24 @@ export class DrawLotsService {
   /** POST price by id. Will 404 if id not found */
   setLock(lock: LotteryLock) : Observable<any> {
     return this.http.post(this.lockUrl, lock, httpOptions).pipe(
-      tap(_ => this.log(`updated lock ${lock}`)),
+      tap(_ => this.log(`updated lock name=${lock.name}`)),
       catchError(this.handleError<any>('setLock'))
     );
   }
 
-
-      /** GET lock by name */
-  getLock(name: string): Observable<LotteryLock> {
-    const url = `${this.lockUrl}/${name}`;
-    return this.http.get<LotteryLock>(url).pipe(
-      tap(_ => this.log(`fetched lock name=${name}`)),
-      catchError(this.handleError<LotteryLock>(`getLock name=${name}`))
-    );
+  getLock<Data>(name: string): Observable<LotteryLock> {
+    const url = `${this.lockUrl}/?name=${name}`;
+    return this.http.get<LotteryLock[]>(url)
+      .pipe(
+        map(locks => locks[0]), // returns a {0|1} element array
+        tap(h => {
+          const outcome = h ? `fetched` : `did not find`;
+          this.log(`${outcome} lock name=${name}`);
+        }),
+        catchError(this.handleError<LotteryLock>(`getLock name=${name}`))
+      );
   }
-    
+
       /**
    * Handle Http operation that failed.
    * Let the app continue.

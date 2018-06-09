@@ -32,16 +32,44 @@ export class ResetPinComponent implements OnInit {
           this.cardService.updateCard (this.cards[i]).subscribe();
         }
       });
-      this.drawLotsService.getLock('lottery-start').subscribe((lock : LotteryLock) => {
-        lock.lock = 0;
-        this.drawLotsService.setLock(lock).subscribe();
+
+
+      this.drawLotsService.getLock('lottery-start').subscribe((lock: LotteryLock) => {
+        this.resetLock(lock);
       });
-      this.drawLotsService.getLock('lottery-done').subscribe((lock : LotteryLock) => {
-        lock.lock = 0;
-        this.drawLotsService.setLock(lock).subscribe();
+      this.drawLotsService.getLock('lottery-done').subscribe((lock: LotteryLock) => {
+        this.resetLock(lock);
       });
+
+
+ 
     }
   }
+
+  resetLock(lock: LotteryLock) {
+    if(lock!=undefined){
+      lock.lock = 0;
+      this.drawLotsService.setLock(lock).subscribe(() =>{
+        this.drawLotsService.getLock(lock.name).subscribe((lock: LotteryLock) => {
+          let L = lock.lock;
+      });
+
+    });
+  }
+}
+
+
+//  resetLock(lock: LotteryLock) {
+//      if(lock!=undefined){
+//      lock.lock = 1;
+//      this.drawLotsService.setLock(lock).subscribe(() =>{
+//        this.drawLotsService.getLock('lottery-start').subscribe((lock: LotteryLock) => {
+//          this.resetLock(lock);
+//        });
+
+//      });
+//    }
+//  }
 
   pin(value: string) {
     this.pinValue = value;
