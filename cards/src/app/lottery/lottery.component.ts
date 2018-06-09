@@ -21,21 +21,19 @@ export class LotteryComponent implements OnInit {
   }
 
   getCards(): Boolean {
-    let r=false;
+    let R=false;
     this.cardService.getCards().subscribe((acards : Card[]) => {
       this.cards = JSON.parse(JSON.stringify(acards));
-
-      for (var i = 0; i < this.cards.length; i++) {
-        console.log(this.cards[i].rnd);
-      }
         
     if (this.cards && this.cards.length>0)
-      this.cards = this.cards.filter(h => (h.rnd!=''));
+      this.cards = this.cards.filter(h => (h.owner!='' && h.owner!='system' && h.rnd!=''));
 
-    if (this.cards && this.cards.length>0)
+    if (this.cards && this.cards.length>0) {
       this.cards.sort((a,b)=>(+b.rnd)-(+a.rnd));
-      r=true;
-    });
-    return r;
+      R=true;
+    }
+  });
+  return R;
   }
+
 }
