@@ -4,10 +4,8 @@
     <div><label><span>Rnd: </span>{{card.rnd}}</label></div>
     <div><label><span>Id: </span>{{card.id}}</label></div>
     <div><label><span>Name: </span>{{card.name}}</label></div>
-    <div *ngIf="card.owner!='system'">
-      <label><span>Owner: </span>{{card.owner}}</label>
-    </div>
-    <button (click)="clear()">Clear</button>
+    <label><span>Owner: </span>{{card.owner}}</label>
+    <div><button (click)="clear()">Clear</button></div>
     <div><img src="{{card.image}}" alt="{{card.name}}" width="25%"></div>
   </div>
   
