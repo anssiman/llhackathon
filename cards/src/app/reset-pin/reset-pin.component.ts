@@ -37,7 +37,7 @@ export class ResetPinComponent implements OnInit {
         this.drawLotsService.setLock(lock).subscribe();
       });
       this.drawLotsService.getLock('lottery-done').subscribe((lock : LotteryLock) => {
-        lock.lock = 1;
+        lock.lock = 0;
         this.drawLotsService.setLock(lock).subscribe();
       });
     }
