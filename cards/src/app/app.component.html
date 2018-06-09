@@ -1,13 +1,13 @@
 <h1>{{title}}</h1>
 <nav>
-  <a routerLink="/dashboard">Dashboard</a>
+  <a routerLink="/dashboard">Dashboard <i class="fas fa-home"></i></a>
   &nbsp;
-  <a routerLink="/cards">Reserved Cards</a>
+  <a routerLink="/cards">Reserved Cards <i class="fas fa-ban"></i></a>
   &nbsp;
-  <a routerLink="/price">Price</a>
+  <a routerLink="/price">Price <i class="fas fa-glass-martini"></i></a>
   &nbsp;
-  <a routerLink="/lottery">Lottery</a>
+  <a routerLink="/lottery">Lottery <i class="fas fa-dice"></i></a>
 </nav>
-<app-reset-pin></app-reset-pin>
 <router-outlet></router-outlet>
+<app-reset-pin></app-reset-pin>
 <app-messages></app-messages>
