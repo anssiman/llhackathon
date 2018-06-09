@@ -3,6 +3,8 @@ declare var require: any;
 
 export class InMemoryDataService implements InMemoryDbService {
   createDb() { 
+    const lottery = [{id: 0, name: "lottery-start", lock: '0'},
+    {id: 1, name: "lottery-done", lock: '0'}];
     const price = [{id: 0, name: "Jaloviina *", url: "https://www.alko.fi/products/000706/Jaloviina-", description: "Yhden tähden jallu", provider: "Antti", dateOfLottery: "07.06.2018"},
     {id: 1, name: "Jaloviina **", url: "https://www.alko.fi/products/000706/Jaloviina-", description: "Kahden tähden jallu", provider: "Antin peräkontti", dateOfLottery: "07.06.2018"}];
     const cards = [

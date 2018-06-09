@@ -50,14 +50,24 @@ export class DrawLotsService {
   return R;
   }
 
-    /** POST price by id. Will 404 if id not found */
-    setLock(lock: LotteryLock) : Observable<any> {
-      return this.http.post(this.lockUrl, lock, httpOptions).pipe(
-        tap(_ => this.log(`updated lock ${lock}`)),
-        catchError(this.handleError<any>('setLock'))
-      );
-    }
+  /** POST price by id. Will 404 if id not found */
+  setLock(lock: LotteryLock) : Observable<any> {
+    return this.http.post(this.lockUrl, lock, httpOptions).pipe(
+      tap(_ => this.log(`updated lock ${lock}`)),
+      catchError(this.handleError<any>('setLock'))
+    );
+  }
 
+
+      /** GET lock by name */
+  getLock(name: string): Observable<LotteryLock> {
+    const url = `${this.lockUrl}/${name}`;
+    return this.http.get<LotteryLock>(url).pipe(
+      tap(_ => this.log(`fetched lock name=${name}`)),
+      catchError(this.handleError<LotteryLock>(`getLock name=${name}`))
+    );
+  }
+    
       /**
    * Handle Http operation that failed.
    * Let the app continue.
@@ -80,7 +90,7 @@ export class DrawLotsService {
 
   /** Log a CardService message with the MessageService */
   private log(message: string) {
-    this.messageService.add('PriceService: ' + message);
+    this.messageService.add('DrawLotsService: ' + message);
   }
 
 }
