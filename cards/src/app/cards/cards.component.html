@@ -14,7 +14,7 @@
   <ng-container *ngFor="let card of cards">
     <li *ngIf="card.owner && card.owner!='system'">
       <a routerLink="/detail/{{card.id}}">
-        <img src="{{card.image}}" alt="{{card.name}}" width="33%"/>
+        <img *ngIf="card.image | resolveurl | async as url" [src]="url" alt="{{card.name}}" width="33%"/>
         <p>
           Name: {{card.name}}
         </p>
