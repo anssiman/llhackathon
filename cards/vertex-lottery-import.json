@@ -1,6 +1,16 @@
 {
+  "locks":
+    [
+      {"id": 0, "name": "lottery-start", "lock": "0"},
+      {"id": 1, "name": "lottery-done" , "lock": "0"}
+    ],
+  "price":
+    [
+      {"id": 0, "name": "Jaloviina *" , "url": "https://www.alko.fi/products/000706/Jaloviina-", "description": "Yhden tähden jallu" , "provider": "Antti"           , "dateOfLottery": "07.06.2018"},
+      {"id": 1, "name": "Jaloviina **", "url": "https://www.alko.fi/products/000706/Jaloviina-", "description": "Kahden tähden jallu", "provider": "Antin peräkontti", "dateOfLottery": "07.06.2018"}
+    ],
  "cards":
-	[
+    [
       {"id":  0 , "value":  0 , "suit": "spades"   , "owner": "system" , "image": "/png/spades2.png"           , "bimage": "/png/back.png"  , "name": "spades"                       , "rnd": ""},
       {"id":  1 , "value":  0 , "suit": "hearts"   , "owner": "system" , "image": "/png/hearts2.png"           , "bimage": "/png/back.png"  , "name": "hearts"                       , "rnd": ""},
       {"id":  2 , "value":  0 , "suit": "clubs"    , "owner": "system" , "image": "/png/clubs2.png"            , "bimage": "/png/back.png"  , "name": "clubs"                        , "rnd": ""},
