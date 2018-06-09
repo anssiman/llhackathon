@@ -38,9 +38,9 @@ export class LotteryComponent implements OnInit {
 
   callbackDone(lock: LotteryLock) {
     if(lock!=undefined && lock.lock == 0){
-        this.drawLotsService.getLock('lottery-start').subscribe((lock: LotteryLock) => {
-          setTimeout(this.callbackDone(lock),1000);
-        });
+      setTimeout(this.drawLotsService.getLock('lottery-done').subscribe((lock: LotteryLock) => {
+          this.callbackDone(lock);
+        }),1000);
     }
     else if(lock!=undefined && lock.lock == 1){
       this.getCards();
