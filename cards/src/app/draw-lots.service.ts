@@ -26,8 +26,7 @@ export class DrawLotsService {
     private cardService: CardService
   ) {this.cards=[]; }
 
-  drawLots() : Boolean{
-    let R=false;
+  drawLots() {
     this.cardService.getCards().subscribe((acards : Card[]) => {
       this.cards = JSON.parse(JSON.stringify(acards));
     if(this.cards && this.cards.length>0)
@@ -43,11 +42,18 @@ export class DrawLotsService {
       };
       M.add(N,true);
       this.cards[i].rnd = N.toString();
-      this.cardService.updateCard (this.cards[i]).subscribe();
-      R=true;
+      if(i == this.cards.length-1)
+        setTimeout(this.cardService.updateCard (this.cards[i]).subscribe(() => {
+          this.getLock('lottery-done').subscribe((lock: LotteryLock) => {
+            lock.lock=1;
+            this.setLock(lock);
+          });       
+        }),1000);
+      else
+        this.cardService.updateCard (this.cards[i]).subscribe();
     }
   });
-  return R;
+
   }
 
   /** POST price by id. Will 404 if id not found */
