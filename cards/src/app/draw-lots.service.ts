@@ -9,6 +9,7 @@ import { Card } from './card';
 import { CardService } from './card.service';
 import { LotteryLock } from './lottery-lock';
 import { MessageService } from './message.service';
+import { LotteryComponent }   from './lottery/lottery.component';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -26,7 +27,7 @@ export class DrawLotsService {
     private cardService: CardService
   ) {this.cards=[]; }
 
-  drawLots() {
+  drawLots(lottery : LotteryComponent) {
     this.cardService.getCards().subscribe((acards : Card[]) => {
       this.cards = JSON.parse(JSON.stringify(acards));
     if(this.cards && this.cards.length>0)
@@ -42,13 +43,16 @@ export class DrawLotsService {
       };
       M.add(N,true);
       this.cards[i].rnd = N.toString();
-      if(i == this.cards.length-1)
-        setTimeout(this.cardService.updateCard (this.cards[i]).subscribe(() => {
-          this.getLock('lottery-done').subscribe((lock: LotteryLock) => {
+      if(i == this.cards.length-1){
+        this.cardService.updateCard (this.cards[i]).subscribe(() => {
+          setTimeout(this.getLock('lottery-done').subscribe((lock: LotteryLock) => {
             lock.lock=1;
-            this.setLock(lock);
-          });       
-        }),1000);
+            this.setLock(lock).subscribe(()=>{
+              lottery.getCards();
+            })
+          }),1000);       
+        });
+      }
       else
         this.cardService.updateCard (this.cards[i]).subscribe();
     }

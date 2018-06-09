@@ -23,24 +23,24 @@ export class LotteryComponent implements OnInit {
         this.drawLotsService.setLock(lock).subscribe(() =>{
           this.drawLotsService.getLock(lock.name).subscribe((lock: LotteryLock) => {
             if(lock!=undefined && lock.lock==1){
-              this.drawLotsService.drawLots();
+              this.drawLotsService.drawLots(this);
             }
           });
         });
       }
     });
 
-    this.drawLotsService.getLock('lottery-done').subscribe((lock: LotteryLock) => {
-      this.callbackDone(lock);
-    });
+//    this.drawLotsService.getLock('lottery-done').subscribe((lock: LotteryLock) => {
+//      this.callbackDone(lock);
+//    });
 
   }
 
   callbackDone(lock: LotteryLock) {
     if(lock!=undefined && lock.lock == 0){
-      setTimeout(this.drawLotsService.getLock('lottery-done').subscribe((lock: LotteryLock) => {
-          this.callbackDone(lock);
-        }),1000);
+      this.drawLotsService.getLock('lottery-done').subscribe((lock: LotteryLock) => {
+        setTimeout(this.callbackDone(lock),3000);
+        });
     }
     else if(lock!=undefined && lock.lock == 1){
       this.getCards();
