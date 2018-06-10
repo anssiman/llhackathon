@@ -24,6 +24,8 @@ import { ResolveFirestoreUrlByOwnerPipe } from './resolve.firestore.url.o.pipe';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireStorageModule } from 'angularfire2/storage';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 
 @NgModule({
   imports: [
@@ -36,8 +38,11 @@ import { AngularFireStorageModule } from 'angularfire2/storage';
       authDomain: "vertex-lottery.firebaseapp.com",
       storageBucket: "vertex-lottery.appspot.com",
       projectId: "vertex-lottery",
+      databaseURL:  "vertex-lottery.firebaseio.com"
     }),
     AngularFireStorageModule,
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
     // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
     // and returns simulated server responses.
     // Remove it when a real server is ready to receive requests.
