@@ -15,15 +15,17 @@ body, input[text], button {
 
 button.clear {
   font-family: Arial;
-  background-color: #eee;
   border: none;
   padding: 5px 10px;
   border-radius: 4px;
   cursor: pointer;
   cursor: hand;
+  background-color: #EEE;
+  color: #607D8B;        
 }
 button:hover {
-  background-color: #cfd8dc;
+  color: #EEE;
+  background-color: #607D8B;
 }
 button:disabled {
   background-color: #eee;
@@ -31,6 +33,5 @@ button:disabled {
   cursor: auto;
 }
 button.clear {
-  color: #888;
   margin-bottom: 12px;
 }
