@@ -1,29 +1,37 @@
 <h3>Reserved Cards:</h3>
 
-<!--div>
-  <label>Card name:
-    <input #cardName />
-  </label-
-  < (click) passes input value to add() and then clears the input>
-  <button (click)="add(cardName.value); cardName.value=''">
-    add
-  </button>
-</div-->
-
-<ul class="cards">
-  <ng-container *ngFor="let card of cards">
-    <li *ngIf="card.owner && card.owner!='system'">
-      <a routerLink="/detail/{{card.id}}">
-        <img src="{{card.image}}" alt="{{card.name}}" width="33%"/>
-        <p>
-          Name: {{card.name}}
-        </p>
-        <p>
-          Owner: {{card.owner}}
-        </p>
-      </a>
-      <!--button class="delete" title="delete card"
-      (click)="delete(card)">x</button-->
+<ng-container *ngIf="[method]=='firebase'">
+  <ul class="cards">
+    <ng-container *ngFor="let card of cardsRef | async">
+      <li *ngIf="card.owner && card.owner!='system'">
+        <a routerLink="/detail/{{card.id}}">
+          <img *ngIf="card.image | resolveurl | async as url" [src]="url" alt="{{card.name}}" width="33%"/>
+          <p>
+            Name: {{card.name}}
+          </p>
+          <p>
+            Owner: {{card.owner}}
+          </p>
+        </a>
       </li>
-  </ng-container>
-</ul>
+    </ng-container>
+  </ul>
+</ng-container>
+
+<ng-container *ngIf="[method]!='firebase'">
+  <ul class="cards">
+    <ng-container *ngFor="let card of cards">
+      <li *ngIf="card.owner && card.owner!='system'">
+        <a routerLink="/detail/{{card.id}}">
+          <img *ngIf="card.image | resolveurl | async as url" [src]="url" alt="{{card.name}}" width="33%"/>
+          <p>
+            Name: {{card.name}}
+          </p>
+          <p>
+            Owner: {{card.owner}}
+          </p>
+        </a>
+      </li>
+    </ng-container>
+  </ul>
+</ng-container>

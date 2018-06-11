@@ -1,25 +1,69 @@
 <h3>Choose your card!</h3>
 
-<div class="grid grid-pad">
-  <ng-container *ngFor="let suit of suits">
-    <a class="col-1-4" routerLink="/dashboard">
-      <div class="module card">
-        <h2>{{suit.name | uppercase }}</h2>
-        <img src="{{suit.image}}" alt="{{suit.name}}" width="100%"/>
-      </div>
-    </a>
-  </ng-container>
+<ng-container *ngIf="[method]=='firebase'">
+  <div class="grid grid-pad">
+    <ng-container *ngFor="let suit of suitsRef | async">
+      <a class="col-1-4" routerLink="/dashboard">
+        <div class="module card">
+          <h2>{{suit.name | uppercase }}</h2>
+          <img *ngIf="suit.image | resolveurl | async as url" [src]="url" alt="{{suit.name}}" width="100%"/>
+        </div>
+      </a>
+    </ng-container>
+  </div>
+  
+  <div class="grid grid-pad">
+    <ng-container *ngFor="let card of cardsRef | async">
+      <a *ngIf= "card.owner!='system'" class="col-1-4" routerLink="/detail/{{card.id}}">
+        <div class="module card">
+          <h4>{{card.name | uppercase }}</h4>
+          <img *ngIf="card | resolveurlbyowner | async as url" [src]="url" alt="{{card.name}}" width="100%"/>
+          <h4 *ngIf="card.owner" >Owner: {{card.owner}}</h4>
+          <h4 *ngIf="!card.owner" >Owner: N/A</h4>
+        </div>
+      </a>
+      <a *ngIf="card.owner=='system'" class="col-1-4" routerLink="/dashboard">
+        <div class="module card">
+          <h4>{{card.name | uppercase }}</h4>
+          <img *ngIf="card | resolveurlbyowner | async as url" [src]="url" alt="{{card.name}}" width="100%"/>
+          <h4>Just a placeholder...</h4>
+        </div>
+      </a>
+    </ng-container>
+  </div>
+</ng-container>
 
-  <ng-container *ngFor="let card of cards">
-    <a class="col-1-4" routerLink="/detail/{{card.id}}">
-      <div class="module card">
-        <h4>{{card.name | uppercase }}</h4>
-        <img *ngIf="card.owner" src="{{card.bimage}}" alt="{{card.name}}" width="100%"/>
-        <img *ngIf="!card.owner" src="{{card.image}}" alt="{{card.name}}" width="100%"/>
-        <h4>{{card.owner}}</h4>
-      </div>
-    </a>
-  </ng-container>
-</div>
+<ng-container *ngIf="[method]!='firebase'">
+  <div class="grid grid-pad">
+    <ng-container *ngFor="let suit of suits">
+      <a class="col-1-4" routerLink="/dashboard">
+        <div class="module card">
+          <h2>{{suit.name | uppercase }}</h2>
+          <img *ngIf="suit.image | resolveurl | async as url" [src]="url" alt="{{suit.name}}" width="100%"/>
+        </div>
+      </a>
+    </ng-container>
+  </div>
+
+  <div class="grid grid-pad">
+    <ng-container *ngFor="let card of cards">
+      <a *ngIf= "card.owner!='system'" class="col-1-4" routerLink="/detail/{{card.id}}">
+        <div class="module card">
+          <h4>{{card.name | uppercase }}</h4>
+          <img *ngIf="card | resolveurlbyowner | async as url" [src]="url" alt="{{card.name}}" width="100%"/>
+          <h4 *ngIf="card.owner" >Owner: {{card.owner}}</h4>
+          <h4 *ngIf="!card.owner" >Owner: N/A</h4>
+        </div>
+      </a>
+      <a *ngIf="card.owner=='system'" class="col-1-4" routerLink="/dashboard">
+        <div class="module card">
+          <h4>{{card.name | uppercase }}</h4>
+          <img *ngIf="card | resolveurlbyowner | async as url" [src]="url" alt="{{card.name}}" width="100%"/>
+          <h4>Just a placeholder...</h4>
+        </div>
+      </a>
+    </ng-container>
+  </div>
+</ng-container>
 
 <app-card-search></app-card-search>

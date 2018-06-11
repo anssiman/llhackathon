@@ -19,13 +19,30 @@ import { LotteryComponent } from './lottery/lottery.component';
 import { LotteryDetailComponent } from './lottery-detail/lottery-detail.component';
 import { ResetPinComponent } from './reset-pin/reset-pin.component';
 
+import { ResolveFirestoreUrlPipe } from './resolve.firestore.url.pipe';
+import { ResolveFirestoreUrlByOwnerPipe } from './resolve.firestore.url.o.pipe';
+
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireStorageModule } from 'angularfire2/storage';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+
 @NgModule({
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
-
+    AngularFireModule.initializeApp({
+      apiKey: "AIzaSyA_2fHjzIFCOq3z36hnV0umn7pw86YjJY8",
+      authDomain: "vertex-lottery.firebaseapp.com",
+      storageBucket: "vertex-lottery.appspot.com",
+      projectId: "vertex-lottery",
+      databaseURL:  "vertex-lottery.firebaseio.com"
+    }),
+    AngularFireStorageModule,
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
     // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
     // and returns simulated server responses.
     // Remove it when a real server is ready to receive requests.
@@ -43,7 +60,9 @@ import { ResetPinComponent } from './reset-pin/reset-pin.component';
     PriceComponent,
     LotteryComponent,
     LotteryDetailComponent,
-    ResetPinComponent
+    ResetPinComponent,
+    ResolveFirestoreUrlPipe,
+    ResolveFirestoreUrlByOwnerPipe
   ],
   bootstrap: [ AppComponent ]
 })

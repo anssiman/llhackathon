@@ -3,37 +3,38 @@ import { Component, OnInit } from '@angular/core';
 import { Card } from '../card';
 import { CardService } from '../card.service';
 
+import { Observable, of } from 'rxjs';
+
+import { METHOD } from './../settings';
+
 @Component({
   selector: 'app-cards',
   templateUrl: './cards.component.html',
   styleUrls: ['./cards.component.css']
 })
 export class CardsComponent implements OnInit {
+  method: string = METHOD;
+
   cards: Card[];
+  cardsRef: Observable<any[]>;
 
   constructor(private cardService: CardService) { }
 
   ngOnInit() {
-    this.getCards();
+    if (this.method=='firebase') {
+      this.getCardsRef();
+    }
+    else {
+      this.getCards();
+    }
   }
 
   getCards(): void {
     this.cardService.getCards()
-    .subscribe(cards => this.cards = cards);
+      .subscribe(cards => this.cards = cards.slice(4, 60));
   }
 
-  add(name: string): void {
-    name = name.trim();
-    if (!name) { return; }
-    this.cardService.addCard({ name } as Card)
-      .subscribe(card => {
-        this.cards.push(card);
-      });
+  getCardsRef(): void {
+    this.cardsRef = this.cardService.getCardsRef();
   }
-
-  delete(card: Card): void {
-    this.cards = this.cards.filter(h => h !== card);
-    this.cardService.deleteCard(card).subscribe();
-  }
-
 }

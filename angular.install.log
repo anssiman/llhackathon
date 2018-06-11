@@ -26,6 +26,8 @@ sudo npm install rxjs@^6.0.0-beta.1
 sudo npm install zone.js@~0.8.26
 sudo npm install @angular/platform-browser@6.0.3
 
+sudo npm install firebase angularfire2 --save
+
 ng -v
 tsc -v
 git --version

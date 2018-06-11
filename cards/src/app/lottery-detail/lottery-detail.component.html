@@ -6,6 +6,6 @@
     <div><label><span>Name: </span>{{card.name}}</label></div>
     <label><span>Owner: </span>{{card.owner}}</label>
     <div><button (click)="clear()">Clear</button></div>
-    <div><img src="{{card.image}}" alt="{{card.name}}" width="25%"></div>
+    <div><img *ngIf="card.image | resolveurl | async as url" [src]="url" alt="{{card.name}}" width="25%"></div>
   </div>
   

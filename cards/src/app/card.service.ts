@@ -7,6 +7,10 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { Card } from './card';
 import { MessageService } from './message.service';
 
+import { CardFirebaseService } from './card.firebase.service';
+
+import { METHOD } from './settings';
+
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -14,14 +18,19 @@ const httpOptions = {
 @Injectable({ providedIn: 'root' })
 export class CardService {
 
+  method: string = METHOD;
+
   private cardsUrl = 'api/cards';  // URL to web api
 
   constructor(
     private http: HttpClient,
+    private firebase: CardFirebaseService,
     private messageService: MessageService) { }
 
   /** GET cards from the server */
   getCards (): Observable<Card[]> {
+    if (this.method=='firebase')
+      return this.firebase.getCards();
     return this.http.get<Card[]>(this.cardsUrl)
       .pipe(
         tap(cards => this.log(`fetched cards`)),
@@ -29,22 +38,24 @@ export class CardService {
       );
   }
 
-  /** GET card by id. Return `undefined` when id not found */
-  getCardNo404<Data>(id: number): Observable<Card> {
-    const url = `${this.cardsUrl}/?id=${id}`;
-    return this.http.get<Card[]>(url)
-      .pipe(
-        map(cards => cards[0]), // returns a {0|1} element array
-        tap(h => {
-          const outcome = h ? `fetched` : `did not find`;
-          this.log(`${outcome} card id=${id}`);
-        }),
-        catchError(this.handleError<Card>(`getCard id=${id}`))
-      );
+  getCardsRef(): Observable<any[]> {
+    var dummy: Observable<any[]>;
+    if (this.method=='firebase')
+      return this.firebase.getCardsRef();
+    return dummy;
+  }
+
+  getSuitsRef(): Observable<any[]> {
+    var dummy: Observable<any[]>;
+    if (this.method=='firebase')
+      return this.firebase.getSuitsRef();
+    return dummy;
   }
 
   /** GET card by id. Will 404 if id not found */
   getCard(id: number): Observable<Card> {
+    if (this.method=='firebase')
+      return this.firebase.getCard(id);
     const url = `${this.cardsUrl}/${id}`;
     return this.http.get<Card>(url).pipe(
       tap(_ => this.log(`fetched card id=${id}`)),
@@ -52,8 +63,17 @@ export class CardService {
     );
   }
 
+  getCardRef(id: number): Observable<any[]> {
+    var dummy: Observable<any[]>;
+    if (this.method=='firebase')
+      return this.firebase.getCardRef(id);
+    return dummy;
+  }
+
   /* GET cards whose name contains search term */
   searchCards(term: string): Observable<Card[]> {
+    if (this.method=='firebase')
+      return this.firebase.searchCards(term);
     if (!term.trim()) {
       // if not search term, return empty card array.
       return of([]);
@@ -64,29 +84,19 @@ export class CardService {
     );
   }
 
-  //////// Save methods //////////
-
-  /** POST: add a new card to the server */
-  addCard (card: Card): Observable<Card> {
-    return this.http.post<Card>(this.cardsUrl, card, httpOptions).pipe(
-      tap((card: Card) => this.log(`added card w/ id=${card.id}`)),
-      catchError(this.handleError<Card>('addCard'))
-    );
-  }
-
-  /** DELETE: delete the card from the server */
-  deleteCard (card: Card | number): Observable<Card> {
-    const id = typeof card === 'number' ? card : card.id;
-    const url = `${this.cardsUrl}/${id}`;
-
-    return this.http.delete<Card>(url, httpOptions).pipe(
-      tap(_ => this.log(`deleted card id=${id}`)),
-      catchError(this.handleError<Card>('deleteCard'))
-    );
-  }
-
   /** PUT: update the card on the server */
-  updateCard (card: Card): Observable<any> {
+  updateCard (card: Card): Observable<Card> {
+    if (this.method=='firebase')
+      return this.firebase.updateCard(card);
+    return this.http.put<Card>(this.cardsUrl, card, httpOptions).pipe(
+      tap(_ => this.log(`updated card id=${card.id}`)),
+      catchError(this.handleError<any>('updateCard'))
+    );
+  }
+
+  updateCardRef (card: Card): Observable<any> {
+    if (this.method=='firebase')
+      return this.firebase.updateCardRef(card);
     return this.http.put<Card>(this.cardsUrl, card, httpOptions).pipe(
       tap(_ => this.log(`updated card id=${card.id}`)),
       catchError(this.handleError<any>('updateCard'))

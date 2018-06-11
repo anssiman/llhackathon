@@ -32,29 +32,36 @@ export class DrawLotsService {
       this.cards = JSON.parse(JSON.stringify(acards));
     if(this.cards && this.cards.length>0)
       this.cards = this.cards.filter(h => (h.owner != '' && h.owner!='system'));
-    let M = new Map<Boolean>();
-    let N=0;
-    for (var i = 0; i < this.cards.length; i++) {
-      for(;1;){
-        N = Math.floor(100000*Math.random());
-        if(M.has(N)===true)
-          continue;
-        break;
-      };
-      M.add(N,true);
-      this.cards[i].rnd = N.toString();
-      if(i == this.cards.length-1){
-        this.cardService.updateCard (this.cards[i]).subscribe(() => {
-          setTimeout(this.getLock('lottery-done').subscribe((lock: LotteryLock) => {
-            lock.lock=1;
-            this.setLock(lock).subscribe(()=>{
-              lottery.getCards();
-            })
-          }),1000);       
-        });
+    if(this.cards && this.cards.length>0) {
+      let M = new Map<Boolean>();
+      let N=0;
+      for (var i = 0; i < this.cards.length; i++) {
+        for(;1;){
+          N = Math.floor(100000*Math.random());
+          if(M.has(N)===true)
+            continue;
+          break;
+        };
+        M.add(N,true);
+        this.cards[i].rnd = N.toString();
+        if(i == this.cards.length-1)
+          setTimeout(this.cardService.updateCard (this.cards[i]).subscribe(() => {
+            this.getLock('lottery-done').subscribe((lock: LotteryLock) => {
+              lock.lock=1;
+              this.setLock(lock).subscribe(()=>{
+                lottery.getCards();
+              })
+            });       
+          }),1000);
+        else
+          this.cardService.updateCard (this.cards[i]).subscribe();
       }
-      else
-        this.cardService.updateCard (this.cards[i]).subscribe();
+    }
+    else {
+      this.getLock('lottery-done').subscribe((lock: LotteryLock) => {
+        lock.lock=1;
+        this.setLock(lock);
+      });       
     }
   });
 

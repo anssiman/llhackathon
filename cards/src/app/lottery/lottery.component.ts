@@ -20,7 +20,7 @@ export class LotteryComponent implements OnInit {
     this.drawLotsService.getLock('lottery-start').subscribe((lock: LotteryLock) => {
       if(lock!=undefined && lock.lock==0){
         lock.lock = 1;
-        this.drawLotsService.setLock(lock).subscribe(() =>{
+        this.drawLotsService.setLock(lock).subscribe(() => {
           this.drawLotsService.getLock(lock.name).subscribe((lock: LotteryLock) => {
             if(lock!=undefined && lock.lock==1){
               this.drawLotsService.drawLots(this);
