@@ -27,6 +27,9 @@ import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
+//import { enableProdMode } from '@angular/core';
+//enableProdMode();
+
 @NgModule({
   imports: [
     BrowserModule,
