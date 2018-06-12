@@ -55,7 +55,7 @@ export class LotteryComponent implements OnInit {
       this.cards = this.cards.filter(h => (h.owner!='' && h.owner!='system' && h.rnd!=''));
 
     if (this.cards && this.cards.length>0) {
-      this.cards.sort((a,b)=>{
+      this.cards = this.cards.sort((a,b)=>{
         if (+a.rnd > +b.rnd) {
             return 1;
         }
