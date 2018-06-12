@@ -1,35 +1,33 @@
 <ng-container *ngIf="[method]=='firebase'">
   <div align="center" *ngFor="let card of cardRef | async">
     <div><label>&nbsp;</label></div>
-    <h3>{{ card.name | uppercase }} Details</h3>
-    <div><label><span>Id: </span>{{card.id}}</label></div>
+    <h3>{{ card.name | uppercase }}</h3>
     <div><label><span>Name: </span>{{card.name}}</label></div>
+    <div><label><span>Suit and value: </span>{{card.suit}}  {{card.value}}</label></div>
     <div *ngIf="card.owner!='system'">
-      <label>Owner:
-        <input [(ngModel)]="card.owner" placeholder="owner"/>
-      </label>
-    </div>
-    <button (click)="goBack()">Back</button>
-    &nbsp;&nbsp;
-    <button (click)="saveRef(card,card.owner)">Save</button>
-    <div><img *ngIf="card.image | resolveurl | async as url" [src]="url" alt="{{card.name}}" width="25%"></div>
+       <div><label>Owner:</label></div>
+       <div><label><input (keyup.enter)="saveRef(card,card.owner)" [(ngModel)]="card.owner" placeholder="owner" focus=true/></label></div>
+      </div>
+      <button (click)="goBack()"><i class="fas fa-arrow-left"></i> Back</button>
+      &nbsp;&nbsp;
+      <button (click)="saveRef(card,card.owner)"><i class="fas fa-save"></i> Save</button>
+      <div><img *ngIf="card.image | resolveurl | async as url" [src]="url" alt="{{card.name}}" width="25%"></div>
   </div>
 </ng-container>
 
 <ng-container *ngIf="[method]!='firebase'">
   <div align="center" *ngIf="card">
     <div><label>&nbsp;</label></div>
-    <h3>{{ card.name | uppercase }} Details</h3>
-    <div><label><span>Id: </span>{{card.id}}</label></div>
+    <h3>{{ card.name | uppercase }}</h3>
     <div><label><span>Name: </span>{{card.name}}</label></div>
+    <div><label><span>Suit and value: </span>{{card.suit}}  {{card.value}}</label></div>
     <div *ngIf="card.owner!='system'">
-      <label>Owner:
-        <input [(ngModel)]="card.owner" placeholder="owner"/>
-      </label>
+      <div><label>Owner:</label></div>
+      <div><label><input (keyup.enter)="save()" [(ngModel)]="card.owner" placeholder="owner" focus=true/></label></div>
     </div>
-    <button (click)="goBack()">Back</button>
+    <button (click)="goBack()"><i class="fas fa-arrow-left"></i> Back</button>
     &nbsp;&nbsp;
-    <button (click)="save()">Save</button>
+    <button (click)="save()"><i class="fas fa-save"></i> Save</button>
     <div><img *ngIf="card.image | resolveurl | async as url" [src]="url" alt="{{card.name}}" width="25%"></div>
   </div>
 </ng-container>

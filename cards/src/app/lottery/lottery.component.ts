@@ -11,7 +11,7 @@ import { LotteryLock } from '../lottery-lock';
   styleUrls: [ './lottery.component.css' ]
 })
 export class LotteryComponent implements OnInit {
-  private cards: Card[];
+  cards: Card[];
 
   constructor(private drawLotsService: DrawLotsService,
               private cardService: CardService) { this.cards=[];}

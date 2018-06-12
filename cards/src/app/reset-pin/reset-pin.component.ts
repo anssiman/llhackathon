@@ -22,7 +22,7 @@ export class ResetPinComponent implements OnInit {
   ngOnInit() {
   }
 
-  reset(value : string){
+  reset(){
     if(this.pinValue == '1234'){
       this.cardService.getCards().subscribe((acards : Card[]) => {
         this.cards = JSON.parse(JSON.stringify(acards));

@@ -27,6 +27,11 @@ import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
+import {FocusModule} from 'angular2-focus';
+
+//import { enableProdMode } from '@angular/core';
+//enableProdMode();
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -48,7 +53,8 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
     // Remove it when a real server is ready to receive requests.
     HttpClientInMemoryWebApiModule.forRoot(
       InMemoryDataService, { dataEncapsulation: false }
-    )
+    ),
+    FocusModule.forRoot()
   ],
   declarations: [
     AppComponent,

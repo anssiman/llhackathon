@@ -19,7 +19,7 @@ export class CardFirebaseService {
 
     getCards(): Observable<Card[]> {
       var C: Observable<Card[]>;
-      this.db.list('cards').snapshotChanges().subscribe(crds => C);
+      //this.db.list('cards').snapshotChanges().subscribe(crds => C);
       return C.pipe(
           tap(cards => this.log(`fetched cards`)),
           catchError(this.handleError('getCards', []))
@@ -38,7 +38,7 @@ export class CardFirebaseService {
 
     getCard(id: number): Observable<Card> {
       var C: Observable<any>;
-      this.db.list('cards',ref =>  {let q = ref.orderByChild('id').equalTo(id); return q;}).snapshotChanges().subscribe(crd => C);
+      //this.db.list('cards',ref =>  {let q = ref.orderByChild('id').equalTo(id); return q;}).snapshotChanges().subscribe(crd => C);
       return C.pipe(
           tap(_ => this.log(`fetched card id=${id}`)),
           catchError(this.handleError<Card>(`getCard id=${id}`))
@@ -54,7 +54,7 @@ export class CardFirebaseService {
       if (!term.trim())
         return of([]);
       var C: Observable<Card[]>;
-      this.db.list('cards').snapshotChanges().subscribe(crds => C);
+      //this.db.list('cards').snapshotChanges().subscribe(crds => C);
       return C.pipe(
           tap(_ => this.log(`found cards matching "${term}"`)),
           catchError(this.handleError<Card[]>('searchCards', []))
@@ -63,7 +63,7 @@ export class CardFirebaseService {
 
     updateCard(card: Card): Observable<Card> {
       var C: Observable<Card>;
-      this.db.list('cards',ref =>  {let q = ref.orderByChild('id').equalTo(card.id); return q;}).snapshotChanges().subscribe(crd => C);
+      //this.db.list('cards',ref =>  {let q = ref.orderByChild('id').equalTo(card.id); return q;}).snapshotChanges().subscribe(crd => C);
       return C.pipe(
           tap(_ => this.log(`fetched card id=${card.id}`)),
           catchError(this.handleError<Card>(`getCard id=${card.id}`))

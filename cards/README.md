@@ -4,8 +4,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Notice
 
-Requires In-memory Web API package, Firebase and AngularFire2
-Run `npm install angular-in-memory-web-api firebase angularfire2 --save` if you want to get the `Cards app` compilation succeed. Plan is to remove In-memory Web API dependency some day soon...
+Requires FocusModule, In-memory Web API package, Firebase and AngularFire2
+Run `npm install angular2-focus angular-in-memory-web-api firebase angularfire2 --save` if you want to get the `Cards app` compilation succeed. Plan is to remove In-memory Web API dependency some day soon...
 
 ## Development server
 
