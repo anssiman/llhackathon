@@ -15,22 +15,23 @@ label {
     margin-top: 10px;
     margin-bottom: 20px;
     font-family: Arial;
-    background-color: #eee;
     border: none;
     padding: 5px 10px;
     border-radius: 4px;
     cursor: pointer; cursor: hand;
     font-size: 1.2em;
+    background-color: #EEE;
+    color: #607D8B;  
   }
   button:hover {
-    background-color: #cfd8dc;
+    color: #EEE;
+    background-color: #607D8B;
   }
   button:disabled {
     background-color: #eee;
     color: #ccc;
     cursor: auto;
   }
-  
   h3 {
     text-align: center;
     margin-bottom: 10px;
