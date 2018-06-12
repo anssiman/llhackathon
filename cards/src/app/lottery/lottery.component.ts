@@ -47,8 +47,7 @@ export class LotteryComponent implements OnInit {
     }
   }
 
-  getCards(): Boolean {
-    let R=false;
+  getCards() {
     this.cardService.getCards().subscribe((acards : Card[]) => {
       this.cards = JSON.parse(JSON.stringify(acards));
         
@@ -56,11 +55,19 @@ export class LotteryComponent implements OnInit {
       this.cards = this.cards.filter(h => (h.owner!='' && h.owner!='system' && h.rnd!=''));
 
     if (this.cards && this.cards.length>0) {
-      this.cards.sort((a,b)=>(+b.rnd)-(+a.rnd));
-      R=true;
+      this.cards = this.cards.sort((a,b)=>{
+        if (+a.rnd > +b.rnd) {
+            return 1;
+        }
+    
+        if (+a.rnd < +b.rnd) {
+            return -1;
+        }
+    
+        return 0;
+      });
     }
   });
-  return R;
   }
 
 }

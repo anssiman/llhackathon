@@ -28,7 +28,7 @@ export class ResetPinComponent implements OnInit {
         this.cards = JSON.parse(JSON.stringify(acards));
         for (var i = 0; i < this.cards.length; i++) {
           this.cards[i].rnd = undefined;
-          this.cards[i].owner = undefined;
+          this.cards[i].owner = "";
           this.cardService.updateCard (this.cards[i]).subscribe();
         }
       });
